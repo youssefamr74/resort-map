@@ -97,7 +97,7 @@ A few things worth explaining about how specific tiles get built:
 
 This is computed fresh from the grid every time the map is parsed, so it isn't tied to this specific layout. Swap in a different `map.ascii` and the paths still render with the correct shape and orientation for whatever corridors that map actually has.
 
-**The pool renders as one image, not per-tile tiles.** Rather than repeating a water texture across every `p` cell, the backend scans the grid for all `p` tiles and computes a bounding box (top-left row and column, plus how many rows and columns it spans). The frontend places a single `pool.png` over that exact area. This is computed from the actual map data too, so it isn't hardcoded to the size or position of the pool in the example file.
+**The pool renders as one image, not per-tile tiles.**
 
 ## Running tests
 
