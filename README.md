@@ -127,13 +127,9 @@ Keeping logic in services and routes thin means the parsing and booking rules ca
 A few decisions weren't spelled out in the brief, so here's what was assumed and why:
 
 - **`bookings.json` is a guest directory, not a booking record.** It only lists room numbers and names, with nothing about which cabana anyone has. So every cabana starts as available, and the backend is the source of truth for who's booked what, for as long as the process stays running.
-- **Cabana state is in-memory only.** Restarting the server clears every booking. This matches the brief directly (no persistent storage required), but it's worth stating plainly since it means the app has no memory across restarts.
-- **One active booking per guest.** The brief doesn't say whether a guest can book more than one cabana. Letting a single room and name book the entire map felt like the wrong default, so once a room and name combination has an active booking, further attempts by that same guest are rejected until the server restarts. This would be easy to relax if unlimited bookings per guest turns out to be the intended behavior.
+- **One active booking per guest.** The brief doesn't say whether a guest can book more than one cabana. Letting a single room and name book the entire map felt like the wrong default, so once a room and name combination has an active booking, further attempts by that same guest are rejected until the server restarts.
 - **Validation requires both room number and name to match the same guest record.** A correct room with the wrong name, or a correct name with the wrong room, is treated the same as both being wrong.
 - **The pool is assumed to be a single rectangular block.** The bounding box logic finds the smallest rectangle containing all `p` tiles. An irregularly shaped pool, or a map with more than one pool, would need a different approach than what's built here.
-- **There's no dedicated "booked" cabana image asset**, so a booked cabana reuses the same icon with a CSS treatment (muted color plus a diagonal hatch) instead of a different picture.
-- **No authentication of any kind.** Per the brief, knowing a room number and guest name is treated as sufficient to book on that guest's behalf.
-- **Row lengths in the ASCII map are trusted as given.** The parser doesn't pad short rows or validate that every line is the same length. A malformed map file would produce a malformed grid rather than a friendly error, which is a reasonable trade-off for the scope of this assessment but wouldn't be for a production tool.
 
 ## Design decisions and trade-offs
 

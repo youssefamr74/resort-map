@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --parchment: #ede0c8;
+  --parchment-dark: #ddccA6;
+  --ink: #2b2620;
+  --water: #5d8a96;
+  --gold: #a8792e;
+  --rust: #9c4a32;
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Work Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.app h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.app-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ink);
+  opacity: 0.65;
+  margin-bottom: 32px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* --- Map frame: the "postcard" signature element --- */
+
+.resort-map-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  overflow-x: auto; 
+}
+
+.resort-map-frame {
+  padding: 14px;
+  background: var(--parchment-dark);
+  border: 2px solid var(--gold);
+  border-radius: 2px;
+  box-shadow: 0 4px 0 rgba(43, 38, 32, 0.08), 0 8px 24px rgba(43, 38, 32, 0.12);
+}
+
+.resort-map-grid {
+  display: grid;
+  gap: 2px;
+  background: var(--gold);
+  border: 1px solid var(--ink);
+}
+
+.tile,
+.tile-pool,
+.tile-cabana {
+  width: 40px;
+  height: 40px;
+}
+
+.tile {
+  display: block;
+  object-fit: cover;
+  background: var(--parchment);
+}
+
+
+
+.resort-map-grid-container {
+  position: relative;
+}
+
+.tile-pool-cell {
+  background: var(--water);
+}
+
+.pool-overlay {
+  position: absolute;
+  object-fit: cover;
+  pointer-events: none;
+  border: 1px solid var(--ink);
+  box-sizing: border-box;
+}
+
+.tile-cabana {
+  padding: 2px;
+  border: none;
+  cursor: pointer;
+  background: var(--parchment);
+  transition: transform 0.1s ease;
+}
+
+.tile-cabana:hover:not(.tile-cabana-booked) {
+  transform: scale(1.12);
+  z-index: 2;
+  position: relative;
+}
+
+.tile-cabana img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-cabana-booked {
+  filter: sepia(40%) saturate(80%) brightness(0.7);
+  cursor: not-allowed;
+  position: relative;
+}
+
+.tile-cabana-booked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 3px,
+    rgba(156, 74, 50, 0.55) 3px,
+    rgba(156, 74, 50, 0.55) 5px
+  );
+}
+
+/* --- Banner --- */
+
+.unavailable-banner {
+  background: var(--parchment-dark);
+  border: 1px solid var(--rust);
+  border-left: 4px solid var(--rust);
+  color: var(--ink);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.unavailable-banner button {
+  background: none;
+  border: none;
+  color: var(--rust);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: var(--font-body);
+}
+
+/* --- Modal --- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 38, 32, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal {
+  background: var(--parchment);
+  border: 2px solid var(--gold);
+  padding: 28px 28px 24px;
+  border-radius: 2px;
+  width: 320px;
+  box-shadow: 0 12px 32px rgba(43, 38, 32, 0.3);
+}
+
+.modal h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.modal p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+.modal input {
+  padding: 9px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  background: white;
+}
+
+.modal input:focus {
+  outline: 2px solid var(--water);
+  outline-offset: 1px;
+}
+
+.form-error {
+  color: var(--rust);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.modal-actions button,
+.modal button[type='button'] {
+  font-family: var(--font-body);
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.modal-actions button[type='submit'] {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: white;
+}
+
+.modal-actions button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-actions button[type='button'],
+.modal button[type='button'] {
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
