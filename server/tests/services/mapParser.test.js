@@ -3,75 +3,123 @@ import { classifyPathTile, parseMap } from '../../src/services/mapParser.js';
 
 describe('classifyPathTile', () => {
   it('returns an isolated arrowEnd tile when there are no path neighbors', () => {
-    expect(classifyPathTile(false, false, false, false)).toEqual({ asset: 'arrowEnd', rotation: 0 });
+    expect(classifyPathTile(false, false, false, false)).toEqual({
+      asset: 'arrowEnd',
+      rotation: 0,
+    });
   });
 
   describe('1 neighbor', () => {
     it('up only', () => {
-      expect(classifyPathTile(true, false, false, false)).toEqual({ asset: 'arrowEnd', rotation: 180 });
+      expect(classifyPathTile(true, false, false, false)).toEqual({
+        asset: 'arrowEnd',
+        rotation: 180,
+      });
     });
 
     it('down only', () => {
-      expect(classifyPathTile(false, true, false, false)).toEqual({ asset: 'arrowEnd', rotation: 0 });
+      expect(classifyPathTile(false, true, false, false)).toEqual({
+        asset: 'arrowEnd',
+        rotation: 0,
+      });
     });
 
     it('left only', () => {
-      expect(classifyPathTile(false, false, true, false)).toEqual({ asset: 'arrowEnd', rotation: 90 });
+      expect(classifyPathTile(false, false, true, false)).toEqual({
+        asset: 'arrowEnd',
+        rotation: 90,
+      });
     });
 
     it('right only', () => {
-      expect(classifyPathTile(false, false, false, true)).toEqual({ asset: 'arrowEnd', rotation: 270 });
+      expect(classifyPathTile(false, false, false, true)).toEqual({
+        asset: 'arrowEnd',
+        rotation: 270,
+      });
     });
   });
 
   describe('2 neighbors — straight', () => {
     it('up + down', () => {
-      expect(classifyPathTile(true, true, false, false)).toEqual({ asset: 'arrowStraight', rotation: 0 });
+      expect(classifyPathTile(true, true, false, false)).toEqual({
+        asset: 'arrowStraight',
+        rotation: 0,
+      });
     });
 
     it('left + right', () => {
-      expect(classifyPathTile(false, false, true, true)).toEqual({ asset: 'arrowStraight', rotation: 90 });
+      expect(classifyPathTile(false, false, true, true)).toEqual({
+        asset: 'arrowStraight',
+        rotation: 90,
+      });
     });
   });
 
   describe('2 neighbors — corner', () => {
     it('up + right', () => {
-      expect(classifyPathTile(true, false, false, true)).toEqual({ asset: 'arrowCornerSquare', rotation: 0 });
+      expect(classifyPathTile(true, false, false, true)).toEqual({
+        asset: 'arrowCornerSquare',
+        rotation: 0,
+      });
     });
 
     it('right + down', () => {
-      expect(classifyPathTile(false, true, false, true)).toEqual({ asset: 'arrowCornerSquare', rotation: 90 });
+      expect(classifyPathTile(false, true, false, true)).toEqual({
+        asset: 'arrowCornerSquare',
+        rotation: 90,
+      });
     });
 
     it('down + left', () => {
-      expect(classifyPathTile(false, true, true, false)).toEqual({ asset: 'arrowCornerSquare', rotation: 180 });
+      expect(classifyPathTile(false, true, true, false)).toEqual({
+        asset: 'arrowCornerSquare',
+        rotation: 180,
+      });
     });
 
     it('left + up', () => {
-      expect(classifyPathTile(true, false, true, false)).toEqual({ asset: 'arrowCornerSquare', rotation: 270 });
+      expect(classifyPathTile(true, false, true, false)).toEqual({
+        asset: 'arrowCornerSquare',
+        rotation: 270,
+      });
     });
   });
 
   describe('3 neighbors', () => {
     it('missing left', () => {
-      expect(classifyPathTile(true, true, false, true)).toEqual({ asset: 'arrowSplit', rotation: 0 });
+      expect(classifyPathTile(true, true, false, true)).toEqual({
+        asset: 'arrowSplit',
+        rotation: 0,
+      });
     });
 
     it('missing up', () => {
-      expect(classifyPathTile(false, true, true, true)).toEqual({ asset: 'arrowSplit', rotation: 90 });
+      expect(classifyPathTile(false, true, true, true)).toEqual({
+        asset: 'arrowSplit',
+        rotation: 90,
+      });
     });
 
     it('missing right', () => {
-      expect(classifyPathTile(true, true, true, false)).toEqual({ asset: 'arrowSplit', rotation: 180 });
+      expect(classifyPathTile(true, true, true, false)).toEqual({
+        asset: 'arrowSplit',
+        rotation: 180,
+      });
     });
 
     it('missing down', () => {
-      expect(classifyPathTile(true, false, true, true)).toEqual({ asset: 'arrowSplit', rotation: 270 });
+      expect(classifyPathTile(true, false, true, true)).toEqual({
+        asset: 'arrowSplit',
+        rotation: 270,
+      });
     });
   });
 
   it('4 neighbors returns arrowCrossing', () => {
-    expect(classifyPathTile(true, true, true, true)).toEqual({ asset: 'arrowCrossing', rotation: 0 });
+    expect(classifyPathTile(true, true, true, true)).toEqual({
+      asset: 'arrowCrossing',
+      rotation: 0,
+    });
   });
 });
 
@@ -107,20 +155,8 @@ describe('parseMap', () => {
         { type: 'empty' },
         { type: 'empty' },
       ],
-      [
-        { type: 'empty' },
-        { type: 'pool' },
-        { type: 'pool' },
-        { type: 'empty' },
-        { type: 'empty' },
-      ],
-      [
-        { type: 'empty' },
-        { type: 'pool' },
-        { type: 'pool' },
-        { type: 'empty' },
-        { type: 'empty' },
-      ],
+      [{ type: 'empty' }, { type: 'pool' }, { type: 'pool' }, { type: 'empty' }, { type: 'empty' }],
+      [{ type: 'empty' }, { type: 'pool' }, { type: 'pool' }, { type: 'empty' }, { type: 'empty' }],
       [
         { type: 'cabana', cabanaId: 'cabana-r4-c0' },
         { type: 'empty' },

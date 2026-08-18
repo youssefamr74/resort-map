@@ -26,8 +26,8 @@ interface MapTileProps {
 
 function MapTile({ tile, cabana, onCabanaClick }: MapTileProps) {
   if (tile.type === 'pool') {
-  return <div className="tile tile-pool-cell" />;
-}
+    return <div className="tile tile-pool-cell" />;
+  }
 
   if (tile.type === 'chalet') {
     return <img src={houseChimney} alt="Chalet" className="tile" />;

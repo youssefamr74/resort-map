@@ -1,19 +1,28 @@
-import type { ResortMapResponse, BookingSuccessResponse, BookingErrorResponse } from '../types/resortMap';
+import type {
+  ResortMapResponse,
+  BookingSuccessResponse,
+  BookingErrorResponse,
+} from '../types/resortMap';
 
 const API_BASE = '/api';
 
 export async function getMap(): Promise<ResortMapResponse> {
   const res = await fetch(`${API_BASE}/map`);
+
+  const data = await res.json();
+
   if (!res.ok) {
-    throw new Error('Failed to load resort map.');
+    const errorData = data as BookingErrorResponse;
+    throw new Error(errorData.error || 'Failed to load resort map.');
   }
-  return res.json();
+
+  return data as ResortMapResponse;
 }
 
 export async function bookCabana(
   cabanaId: string,
   room: string,
-  guestName: string
+  guestName: string,
 ): Promise<BookingSuccessResponse> {
   const res = await fetch(`${API_BASE}/cabanas/${cabanaId}/book`, {
     method: 'POST',

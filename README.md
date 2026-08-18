@@ -43,7 +43,7 @@ On a fresh clone, this installs dependencies for both the backend and frontend a
 
 This starts the backend on `http://localhost:3001` and the frontend on `http://localhost:5173`. Open the frontend URL in your browser.
 
-Both flags are optional. Leaving them out falls back to `map.ascii` and `bookings.json` in the project root.
+Both flags are optional. Leaving them out falls back to `map.ascii` and `bookings.json` resolved relative to the current working directory the backend process is started from — `run.sh` always resolves this to the project root, which is why the defaults work as expected when starting the app through it.
 
 ### Running the two halves manually (if you'd rather not use the script)
 

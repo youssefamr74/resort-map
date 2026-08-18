@@ -122,7 +122,10 @@ export function parseMap(raw) {
     tiles.push(tileRow);
   }
   let poolBounds = null;
-  let minRow = Infinity, maxRow = -Infinity, minCol = Infinity, maxCol = -Infinity;
+  let minRow = Infinity,
+    maxRow = -Infinity,
+    minCol = Infinity,
+    maxCol = -Infinity;
 
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {

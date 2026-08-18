@@ -32,7 +32,6 @@ function ResortMap() {
 
   function handleBookingSuccess(cabanaId: string) {
     markCabanaBooked(cabanaId);
-    setSelectedCabana(null);
   }
 
   const step = TILE_SIZE + GRID_GAP;
@@ -75,10 +74,12 @@ function ResortMap() {
                     onCabanaClick={handleCabanaClick}
                   />
                 );
-              })
+              }),
             )}
           </div>
-          {poolStyle && <img src={pool} alt="Resort pool" className="pool-overlay" style={poolStyle} />}
+          {poolStyle && (
+            <img src={pool} alt="Resort pool" className="pool-overlay" style={poolStyle} />
+          )}
         </div>
       </div>
       {selectedCabana && (

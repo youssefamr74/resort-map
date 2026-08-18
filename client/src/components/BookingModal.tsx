@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { bookCabana } from '../api/client';
 import type { Cabana } from '../types/resortMap';
 
@@ -37,7 +38,9 @@ function BookingModal({ cabana, onClose, onSuccess }: BookingModalProps) {
         {confirmed ? (
           <>
             <h2>You're booked!</h2>
-            <p>Cabana confirmed for {guestName}, room {room}.</p>
+            <p>
+              Cabana confirmed for {guestName}, room {room}.
+            </p>
             <button type="button" onClick={onClose}>
               Back to map
             </button>
@@ -48,22 +51,18 @@ function BookingModal({ cabana, onClose, onSuccess }: BookingModalProps) {
             <form onSubmit={handleSubmit}>
               <label>
                 Room number
-                <input
-                  value={room}
-                  onChange={(e) => setRoom(e.target.value)}
-                  required
-                />
+                <input value={room} onChange={(e) => setRoom(e.target.value)} required />
               </label>
               <label>
                 Guest name
-                <input
-                  value={guestName}
-                  onChange={(e) => setGuestName(e.target.value)}
-                  required
-                />
+                <input value={guestName} onChange={(e) => setGuestName(e.target.value)} required />
               </label>
 
-              {error && <p className="form-error" role="alert">{error}</p>}
+              {error && (
+                <p className="form-error" role="alert">
+                  {error}
+                </p>
+              )}
 
               <div className="modal-actions">
                 <button type="button" onClick={onClose} disabled={submitting}>

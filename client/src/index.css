@@ -8,7 +8,7 @@
 
 :root {
   --parchment: #ede0c8;
-  --parchment-dark: #ddccA6;
+  --parchment-dark: #ddcca6;
   --ink: #2b2620;
   --water: #5d8a96;
   --gold: #a8792e;
@@ -57,7 +57,7 @@ body {
   flex-direction: column;
   align-items: center;
   max-width: 100%;
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .resort-map-frame {
@@ -65,7 +65,9 @@ body {
   background: var(--parchment-dark);
   border: 2px solid var(--gold);
   border-radius: 2px;
-  box-shadow: 0 4px 0 rgba(43, 38, 32, 0.08), 0 8px 24px rgba(43, 38, 32, 0.12);
+  box-shadow:
+    0 4px 0 rgba(43, 38, 32, 0.08),
+    0 8px 24px rgba(43, 38, 32, 0.12);
 }
 
 .resort-map-grid {
@@ -87,8 +89,6 @@ body {
   object-fit: cover;
   background: var(--parchment);
 }
-
-
 
 .resort-map-grid-container {
   position: relative;

@@ -78,4 +78,25 @@ describe('ResortMap', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('This cabana is already booked.');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
+
+  it('shows the "You\'re booked!" confirmation, still open, after submitting a real booking', async () => {
+    const user = userEvent.setup();
+    vi.mocked(getMap).mockResolvedValue(mockMap);
+    vi.mocked(bookCabana).mockResolvedValue({
+      success: true,
+      cabana: { id: 'cabana-r0-c2', row: 0, col: 2, status: 'booked' },
+    });
+
+    render(<ResortMap />);
+
+    const availableCabana = await screen.findByRole('button', { name: 'Cabana available' });
+    await user.click(availableCabana);
+
+    await user.type(screen.getByLabelText('Room number'), '101');
+    await user.type(screen.getByLabelText('Guest name'), 'Violet Cruz');
+    await user.click(screen.getByRole('button', { name: 'Book cabana' }));
+
+    expect(await screen.findByRole('heading', { name: "You're booked!" })).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
 });

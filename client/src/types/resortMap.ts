@@ -1,11 +1,7 @@
 export type SimpleTileType = 'pool' | 'chalet' | 'empty';
 
 export type PathAsset =
-  | 'arrowEnd'
-  | 'arrowStraight'
-  | 'arrowCornerSquare'
-  | 'arrowSplit'
-  | 'arrowCrossing';
+  'arrowEnd' | 'arrowStraight' | 'arrowCornerSquare' | 'arrowSplit' | 'arrowCrossing';
 
 export interface PathTile {
   type: 'path';

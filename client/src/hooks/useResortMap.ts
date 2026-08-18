@@ -26,7 +26,7 @@ export function useResortMap(): UseResortMapResult {
       if (!prev) return prev;
 
       const updatedCabanas: Cabana[] = prev.cabanas.map((c) =>
-        c.id === cabanaId ? { ...c, status: 'booked' } : c
+        c.id === cabanaId ? { ...c, status: 'booked' } : c,
       );
 
       return { ...prev, cabanas: updatedCabanas };

@@ -27,7 +27,7 @@ export function getCabanas() {
  */
 function isValidGuest(room, guestName) {
   return guests.some(
-    (g) => g.room === room && g.guestName.toLowerCase() === guestName.toLowerCase()
+    (g) => g.room === room && g.guestName.toLowerCase() === guestName.toLowerCase(),
   );
 }
 
